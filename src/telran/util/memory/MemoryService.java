@@ -4,15 +4,20 @@ package telran.util.memory;
 
 public class MemoryService {
 public static int getMaxAvailableMemory() {
-	long maxMemory = Runtime.getRuntime().maxMemory();
-	int maxSize = maxMemory > Integer.MAX_VALUE ? Integer.MAX_VALUE : (int) maxMemory;
-	while (true) {
+	
+	int maxSize = Integer.MAX_VALUE;
+	int left = 0, right = maxSize, middle = 0;
+	byte ar[] = null;
+	while (left <= right) {
+		middle = (int)(((long)right + left) / 2) ;
 		try {
-			byte ar[] = new byte[maxSize];
-			ar = null;
-			break;
+			 ar = new byte[middle];
+			 ar = null;
+			maxSize = middle;
+			left = middle + 1;
+			
 		} catch (Throwable e) {
-			maxSize--;
+			right = middle - 1;
 		}
 		
 	}
